@@ -1,0 +1,18 @@
+# Dependencies
+node_modules
+.pnp
+.pnp.js
+
+# Build output
+dist
+build
+.vite
+coverage
+
+# Logs
+*.log
+
+# Lock files
+package-lock.json
+yarn.lock
+bun.lock
