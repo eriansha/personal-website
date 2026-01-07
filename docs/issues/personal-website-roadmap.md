@@ -33,12 +33,7 @@ The website shall contain the following primary sections:
    - When a portfolio item is selected, the system shall display a detailed case study
    - The portfolio page shall support filtering by category or technology
 
-4. **Contact**
-   - The contact page shall provide multiple contact methods (email, social media)
-   - Where a contact form exists, the form shall include spam protection
-   - When the contact form is submitted, the system shall send confirmation to the user
-
-5. **Blog** (Optional)
+4. **Blog** (Optional)
    - Where blogging functionality exists, the blog shall display articles in reverse chronological order
    - The blog shall support categories and tags for organization
 
@@ -380,30 +375,53 @@ Based on the provided references, here's what to incorporate:
   "dependencies": {
     "react": "^19.2.0",
     "react-dom": "^19.2.0",
-    "react-router-dom": "^6.x", // Client-side routing
+    "@tanstack/react-router": "^1.x", // Type-safe routing
     "framer-motion": "^11.x", // Animations
     "cmdk": "^1.x", // Command palette
-    "lucide-react": "^0.x" // Icons
+    "lucide-react": "^0.x", // Icons
+    "class-variance-authority": "^0.7.x", // CVA for component variants
+    "clsx": "^2.x", // Utility for classnames
+    "tailwind-merge": "^2.x", // Merge Tailwind classes
+    "zod": "^3.x" // Schema validation for search params
   },
   "devDependencies": {
     // ... existing dev dependencies
     "tailwindcss": "^3.x", // Utility-first CSS
+    "tailwindcss-animate": "^1.x", // Animation utilities
     "autoprefixer": "^10.x",
     "postcss": "^8.x",
-    "@tailwindcss/typography": "^0.5.x" // Blog typography
+    "@tailwindcss/typography": "^0.5.x", // Blog typography
+    "@tanstack/router-vite-plugin": "^1.x" // Router dev tools
   }
 }
 ```
 
 **Rationale**:
-- **React Router**: Standard for SPA navigation, supports code splitting
+- **TanStack Router**: Type-safe routing with excellent TypeScript support, built-in code splitting, search params validation
+- **shadcn/ui**: Not a dependency but a collection of copy-paste components built with Radix UI and Tailwind
 - **Framer Motion**: Declarative animations, excellent performance, great DX
 - **cmdk**: Best-in-class command palette (used by Linear, Vercel, etc.)
 - **Lucide React**: Modern icon set, tree-shakeable, consistent design
-- **Tailwind CSS**: Rapid development, consistent design system, excellent performance
+- **Tailwind CSS**: Utility-first CSS framework, rapid development, excellent performance
+- **CVA**: Type-safe component variants (used by shadcn/ui)
+
+**shadcn/ui Setup**:
+```bash
+# Initialize shadcn/ui
+bunx shadcn@latest init
+
+# Add components as needed
+bunx shadcn@latest add button
+bunx shadcn@latest add card
+bunx shadcn@latest add badge
+bunx shadcn@latest add dropdown-menu
+bunx shadcn@latest add dialog
+bunx shadcn@latest add tooltip
+```
 
 **Alternative Considerations**:
-- **Styling**: Could use CSS Modules or styled-components if preferred, but Tailwind recommended for speed
+- **Routing**: TanStack Router provides better TypeScript experience than React Router
+- **UI Components**: shadcn/ui provides accessible components you own (not a dependency)
 - **Animations**: Could use GSAP for complex animations, but Framer Motion sufficient for most needs
 - **Markdown**: Add `react-markdown` + `remark-gfm` for blog (P1)
 - **Syntax Highlighting**: Add `shiki` or `prism-react-renderer` for code blocks (P1)
@@ -420,16 +438,18 @@ personal-website/
 │   ├── assets/                # Static assets
 │   │   └── icons/
 │   ├── components/            # Reusable components
-│   │   ├── ui/               # Base UI components
-│   │   │   ├── Button.tsx
-│   │   │   ├── Card.tsx
-│   │   │   ├── Badge.tsx
-│   │   │   └── Link.tsx
+│   │   ├── ui/               # shadcn/ui components (auto-generated)
+│   │   │   ├── button.tsx
+│   │   │   ├── card.tsx
+│   │   │   ├── badge.tsx
+│   │   │   ├── dialog.tsx
+│   │   │   ├── dropdown-menu.tsx
+│   │   │   └── tooltip.tsx
 │   │   ├── layout/           # Layout components
 │   │   │   ├── Header.tsx
 │   │   │   ├── Footer.tsx
 │   │   │   ├── Navigation.tsx
-│   │   │   └── Container.tsx
+│   │   │   └── RootLayout.tsx
 │   │   ├── home/             # Home page components
 │   │   │   ├── Hero.tsx
 │   │   │   ├── FeaturedProjects.tsx
@@ -458,14 +478,14 @@ personal-website/
 │   │   ├── useTheme.ts
 │   │   └── useScrollPosition.ts
 │   ├── lib/                  # Utility functions
-│   │   ├── utils.ts
+│   │   ├── utils.ts          # cn() utility and helpers
 │   │   └── constants.ts
-│   ├── pages/                # Page components
-│   │   ├── HomePage.tsx
-│   │   ├── AboutPage.tsx
-│   │   ├── ProjectsPage.tsx
-│   │   ├── ProjectDetailPage.tsx  # Optional
-│   │   └── NotFoundPage.tsx
+│   ├── routes/               # TanStack Router routes
+│   │   ├── __root.tsx        # Root route with layout
+│   │   ├── index.tsx         # Home page (/)
+│   │   ├── about.tsx         # About page (/about)
+│   │   ├── projects.tsx      # Projects page (/projects)
+│   │   └── projects.$id.tsx  # Project detail (/projects/$id)
 │   ├── styles/               # Global styles
 │   │   ├── globals.css
 │   │   └── animations.css
@@ -473,9 +493,10 @@ personal-website/
 │   │   ├── project.ts
 │   │   ├── experience.ts
 │   │   └── index.ts
-│   ├── App.tsx               # Root component with routing
-│   ├── main.tsx              # Entry point
-│   └── vite-env.d.ts
+│   ├── main.tsx              # Entry point with router setup
+│   ├── routeTree.gen.ts      # Auto-generated route tree
+│   ├── vite-env.d.ts
+│   └── components.json       # shadcn/ui config
 ├── .prettierrc
 ├── eslint.config.js
 ├── tailwind.config.js
@@ -487,8 +508,10 @@ personal-website/
 **File Structure Principles**:
 - **Co-location**: Components grouped by feature/page
 - **Separation of Concerns**: Data, UI, logic separated
+- **File-based Routing**: TanStack Router uses file-based routes in `src/routes/`
+- **shadcn/ui Components**: UI primitives in `src/components/ui/` (generated via CLI)
 - **Scalability**: Easy to add new features (blog, snippets)
-- **Type Safety**: Strong typing with TypeScript
+- **Type Safety**: Strong typing with TypeScript + TanStack Router
 
 ### 4.5 Data Management Strategy
 
@@ -568,30 +591,74 @@ export const getAllTechStack = () =>
 
 ### 4.6 Component Architecture
 
-**Design System Approach**: Atomic Design Lite
+**Design System Approach**: shadcn/ui + Atomic Design Lite
 
-**Base Components (atoms)** - `src/components/ui/`
+**Base Components (shadcn/ui)** - `src/components/ui/`
+
+shadcn/ui provides accessible, customizable components built with Radix UI and Tailwind CSS. These are copy-pasted into your project (not installed as dependencies), giving you full control.
+
 ```typescript
-// Button.tsx
-interface ButtonProps {
-  variant?: 'primary' | 'secondary' | 'ghost'
-  size?: 'sm' | 'md' | 'lg'
-  children: React.ReactNode
-  // ... other props
+// Generated via: bunx shadcn@latest add button
+// src/components/ui/button.tsx
+import * as React from "react"
+import { Slot } from "@radix-ui/react-slot"
+import { cva, type VariantProps } from "class-variance-authority"
+import { cn } from "@/lib/utils"
+
+const buttonVariants = cva(
+  "inline-flex items-center justify-center rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 disabled:pointer-events-none disabled:opacity-50",
+  {
+    variants: {
+      variant: {
+        default: "bg-primary text-primary-foreground hover:bg-primary/90",
+        destructive: "bg-destructive text-destructive-foreground hover:bg-destructive/90",
+        outline: "border border-input bg-background hover:bg-accent hover:text-accent-foreground",
+        secondary: "bg-secondary text-secondary-foreground hover:bg-secondary/80",
+        ghost: "hover:bg-accent hover:text-accent-foreground",
+        link: "text-primary underline-offset-4 hover:underline",
+      },
+      size: {
+        default: "h-10 px-4 py-2",
+        sm: "h-9 rounded-md px-3",
+        lg: "h-11 rounded-md px-8",
+        icon: "h-10 w-10",
+      },
+    },
+    defaultVariants: {
+      variant: "default",
+      size: "default",
+    },
+  }
+)
+
+export interface ButtonProps
+  extends React.ButtonHTMLAttributes<HTMLButtonElement>,
+    VariantProps<typeof buttonVariants> {
+  asChild?: boolean
 }
 
-// Card.tsx
-interface CardProps {
-  children: React.ReactNode
-  hover?: boolean // Enable hover effects
-  className?: string
-}
+export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
+  ({ className, variant, size, asChild = false, ...props }, ref) => {
+    const Comp = asChild ? Slot : "button"
+    return (
+      <Comp
+        className={cn(buttonVariants({ variant, size, className }))}
+        ref={ref}
+        {...props}
+      />
+    )
+  }
+)
+```
 
-// Badge.tsx
-interface BadgeProps {
-  text: string
-  variant?: 'tech' | 'category' | 'status'
-  color?: string
+**Utility Functions** - `src/lib/utils.ts`
+```typescript
+import { type ClassValue, clsx } from "clsx"
+import { twMerge } from "tailwind-merge"
+
+// Merge Tailwind classes without conflicts
+export function cn(...inputs: ClassValue[]) {
+  return twMerge(clsx(inputs))
 }
 ```
 
@@ -599,7 +666,9 @@ interface BadgeProps {
 ```typescript
 // ProjectCard.tsx
 import { Project } from '@/types/project'
-import { Card, Badge, Link } from '@/components/ui'
+import { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter } from '@/components/ui/card'
+import { Badge } from '@/components/ui/badge'
+import { Button } from '@/components/ui/button'
 import { Github, ExternalLink } from 'lucide-react'
 
 interface ProjectCardProps {
@@ -609,31 +678,48 @@ interface ProjectCardProps {
 
 export function ProjectCard({ project, layout = 'grid' }: ProjectCardProps) {
   return (
-    <Card hover className="project-card">
+    <Card className="group hover:shadow-lg transition-shadow">
       {project.image && (
-        <img src={project.image} alt={project.title} />
+        <img
+          src={project.image}
+          alt={project.title}
+          className="w-full h-48 object-cover rounded-t-lg"
+        />
       )}
-      <h3>{project.title}</h3>
-      <p>{project.description}</p>
 
-      <div className="tech-stack">
-        {project.techStack.map(tech => (
-          <Badge key={tech} text={tech} variant="tech" />
-        ))}
-      </div>
+      <CardHeader>
+        <CardTitle>{project.title}</CardTitle>
+        <CardDescription>{project.description}</CardDescription>
+      </CardHeader>
 
-      <div className="links">
+      <CardContent>
+        <div className="flex flex-wrap gap-2">
+          {project.techStack.map(tech => (
+            <Badge key={tech} variant="secondary">
+              {tech}
+            </Badge>
+          ))}
+        </div>
+      </CardContent>
+
+      <CardFooter className="gap-2">
         {project.liveUrl && (
-          <Link href={project.liveUrl} external>
-            <ExternalLink size={16} /> Live
-          </Link>
+          <Button variant="default" size="sm" asChild>
+            <a href={project.liveUrl} target="_blank" rel="noopener noreferrer">
+              <ExternalLink className="mr-2 h-4 w-4" />
+              Live
+            </a>
+          </Button>
         )}
         {project.githubUrl && (
-          <Link href={project.githubUrl} external>
-            <Github size={16} /> Code
-          </Link>
+          <Button variant="outline" size="sm" asChild>
+            <a href={project.githubUrl} target="_blank" rel="noopener noreferrer">
+              <Github className="mr-2 h-4 w-4" />
+              Code
+            </a>
+          </Button>
         )}
-      </div>
+      </CardFooter>
     </Card>
   )
 }
@@ -674,47 +760,42 @@ export function AnimatedText({ text, variant = 'fadeIn', delay = 0 }: AnimatedTe
 
 ### 4.7 Routing Strategy
 
-**Client-Side Routing with React Router v6**
+**File-Based Routing with TanStack Router**
 
+TanStack Router provides type-safe, file-based routing with excellent TypeScript support and built-in code splitting.
+
+**Vite Configuration** - `vite.config.ts`
 ```typescript
-// App.tsx
-import { BrowserRouter, Routes, Route } from 'react-router-dom'
-import { Layout } from '@/components/layout/Layout'
-import { HomePage } from '@/pages/HomePage'
-import { AboutPage } from '@/pages/AboutPage'
-import { ProjectsPage } from '@/pages/ProjectsPage'
-import { NotFoundPage } from '@/pages/NotFoundPage'
+import { defineConfig } from 'vite'
+import react from '@vitejs/plugin-react'
+import { TanStackRouterVite } from '@tanstack/router-vite-plugin'
 
-function App() {
-  return (
-    <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<Layout />}>
-          <Route index element={<HomePage />} />
-          <Route path="about" element={<AboutPage />} />
-          <Route path="projects" element={<ProjectsPage />} />
-          {/* P1 Features */}
-          <Route path="blog" element={<BlogPage />} />
-          <Route path="blog/:slug" element={<BlogPostPage />} />
-          <Route path="snippets" element={<SnippetsPage />} />
-          {/* 404 */}
-          <Route path="*" element={<NotFoundPage />} />
-        </Route>
-      </Routes>
-    </BrowserRouter>
-  )
-}
+export default defineConfig({
+  plugins: [
+    react(),
+    TanStackRouterVite(), // Auto-generates routeTree.gen.ts
+  ],
+  resolve: {
+    alias: {
+      '@': '/src',
+    },
+  },
+})
 ```
 
-**Layout Component with Outlet**:
+**Root Route** - `src/routes/__root.tsx`
 ```typescript
-// components/layout/Layout.tsx
-import { Outlet } from 'react-router-dom'
-import { Header } from './Header'
-import { Footer } from './Footer'
+import { createRootRoute, Outlet } from '@tanstack/react-router'
+import { TanStackRouterDevtools } from '@tanstack/router-devtools'
+import { Header } from '@/components/layout/Header'
+import { Footer } from '@/components/layout/Footer'
 import { CommandPalette } from '@/components/shared/CommandPalette'
 
-export function Layout() {
+export const Route = createRootRoute({
+  component: RootLayout,
+})
+
+function RootLayout() {
   return (
     <>
       <CommandPalette />
@@ -723,16 +804,154 @@ export function Layout() {
         <Outlet />
       </main>
       <Footer />
+      {process.env.NODE_ENV === 'development' && <TanStackRouterDevtools />}
     </>
   )
 }
 ```
 
+**Home Route** - `src/routes/index.tsx`
+```typescript
+import { createFileRoute } from '@tanstack/react-router'
+import { Hero } from '@/components/home/Hero'
+import { FeaturedProjects } from '@/components/home/FeaturedProjects'
+import { SocialLinks } from '@/components/home/SocialLinks'
+
+export const Route = createFileRoute('/')({
+  component: HomePage,
+  meta: () => [
+    { title: 'Ivan Putra Eriansya | Full Stack Software Engineer' },
+    { name: 'description', content: 'Full Stack Engineer with 8 years of experience...' },
+  ],
+})
+
+function HomePage() {
+  return (
+    <div className="container mx-auto px-4">
+      <Hero />
+      <FeaturedProjects />
+      <SocialLinks />
+    </div>
+  )
+}
+```
+
+**About Route** - `src/routes/about.tsx`
+```typescript
+import { createFileRoute } from '@tanstack/react-router'
+import { Timeline } from '@/components/about/Timeline'
+import { Skills } from '@/components/about/Skills'
+
+export const Route = createFileRoute('/about')({
+  component: AboutPage,
+})
+
+function AboutPage() {
+  return (
+    <div className="container mx-auto px-4 py-12">
+      <h1 className="text-4xl font-bold mb-8">About Me</h1>
+      <Timeline />
+      <Skills />
+    </div>
+  )
+}
+```
+
+**Projects Route with Search Params** - `src/routes/projects.tsx`
+```typescript
+import { createFileRoute } from '@tanstack/react-router'
+import { z } from 'zod'
+import { ProjectGrid } from '@/components/projects/ProjectGrid'
+import { ProjectFilter } from '@/components/projects/ProjectFilter'
+
+// Type-safe search params
+const projectSearchSchema = z.object({
+  category: z.string().optional(),
+  tech: z.string().optional(),
+})
+
+export const Route = createFileRoute('/projects')({
+  component: ProjectsPage,
+  validateSearch: projectSearchSchema,
+})
+
+function ProjectsPage() {
+  const { category, tech } = Route.useSearch()
+
+  return (
+    <div className="container mx-auto px-4 py-12">
+      <h1 className="text-4xl font-bold mb-8">Projects</h1>
+      <ProjectFilter />
+      <ProjectGrid category={category} tech={tech} />
+    </div>
+  )
+}
+```
+
+**Project Detail Route (Dynamic)** - `src/routes/projects.$id.tsx`
+```typescript
+import { createFileRoute, notFound } from '@tanstack/react-router'
+import { projects } from '@/data/projects'
+
+export const Route = createFileRoute('/projects/$id')({
+  component: ProjectDetailPage,
+  loader: ({ params }) => {
+    const project = projects.find(p => p.id === params.id)
+    if (!project) throw notFound()
+    return { project }
+  },
+})
+
+function ProjectDetailPage() {
+  const { project } = Route.useLoaderData()
+
+  return (
+    <div className="container mx-auto px-4 py-12">
+      <h1 className="text-4xl font-bold mb-4">{project.title}</h1>
+      <p className="text-lg text-muted-foreground">{project.description}</p>
+      {/* Project details */}
+    </div>
+  )
+}
+```
+
+**Main Entry Point** - `src/main.tsx`
+```typescript
+import React from 'react'
+import ReactDOM from 'react-dom/client'
+import { RouterProvider, createRouter } from '@tanstack/react-router'
+import { routeTree } from './routeTree.gen' // Auto-generated
+import './styles/globals.css'
+
+// Create router instance
+const router = createRouter({
+  routeTree,
+  defaultPreload: 'intent', // Preload on hover
+})
+
+// Type-safe router for global use
+declare module '@tanstack/react-router' {
+  interface Register {
+    router: typeof router
+  }
+}
+
+ReactDOM.createRoot(document.getElementById('root')!).render(
+  <React.StrictMode>
+    <RouterProvider router={router} />
+  </React.StrictMode>
+)
+```
+
 **Benefits**:
-- Code splitting by route (lazy loading)
-- Nested layouts
-- Type-safe navigation
-- SEO-friendly with proper meta tags per route
+- **Type Safety**: Full TypeScript support with autocomplete for routes and params
+- **File-Based**: Routes automatically generated from file structure
+- **Code Splitting**: Automatic code splitting by route
+- **Search Params Validation**: Type-safe search/query parameters with Zod
+- **Data Loaders**: Load data before rendering (similar to Remix/Next.js)
+- **Preloading**: Intelligent route preloading on hover
+- **DevTools**: Built-in router devtools for development
+- **No Manual Route Config**: Routes auto-generated from file names
 
 ### 4.8 Animation Implementation
 
@@ -854,12 +1073,13 @@ const charVariants = {
 ```typescript
 // components/shared/CommandPalette.tsx
 import { useEffect, useState } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate } from '@tanstack/react-router'
 import { Command } from 'cmdk'
 import {
   Home, User, Briefcase, Mail, Github,
-  Linkedin, Sun, Moon, FileText
+  Linkedin, FileText
 } from 'lucide-react'
+import { Dialog, DialogContent } from '@/components/ui/dialog'
 
 export function CommandPalette() {
   const [open, setOpen] = useState(false)
@@ -883,57 +1103,85 @@ export function CommandPalette() {
   }
 
   return (
-    <Command.Dialog open={open} onOpenChange={setOpen}>
-      <Command.Input placeholder="Type a command or search..." />
-      <Command.List>
-        <Command.Empty>No results found.</Command.Empty>
+    <Dialog open={open} onOpenChange={setOpen}>
+      <DialogContent className="overflow-hidden p-0">
+        <Command className="[&_[cmdk-group-heading]]:px-2 [&_[cmdk-group-heading]]:font-medium [&_[cmdk-group-heading]]:text-muted-foreground">
+          <Command.Input
+            placeholder="Type a command or search..."
+            className="h-12 px-4 text-sm outline-none"
+          />
+          <Command.List className="max-h-[300px] overflow-y-auto p-2">
+            <Command.Empty>No results found.</Command.Empty>
 
-        <Command.Group heading="Navigation">
-          <Command.Item onSelect={() => runCommand(() => navigate('/'))}>
-            <Home size={16} />
-            <span>Home</span>
-          </Command.Item>
-          <Command.Item onSelect={() => runCommand(() => navigate('/about'))}>
-            <User size={16} />
-            <span>About</span>
-          </Command.Item>
-          <Command.Item onSelect={() => runCommand(() => navigate('/projects'))}>
-            <Briefcase size={16} />
-            <span>Projects</span>
-          </Command.Item>
-        </Command.Group>
+            <Command.Group heading="Navigation">
+              <Command.Item
+                onSelect={() => runCommand(() => navigate({ to: '/' }))}
+                className="flex items-center gap-2 rounded-sm px-2 py-1.5 text-sm hover:bg-accent cursor-pointer"
+              >
+                <Home size={16} />
+                <span>Home</span>
+              </Command.Item>
+              <Command.Item
+                onSelect={() => runCommand(() => navigate({ to: '/about' }))}
+                className="flex items-center gap-2 rounded-sm px-2 py-1.5 text-sm hover:bg-accent cursor-pointer"
+              >
+                <User size={16} />
+                <span>About</span>
+              </Command.Item>
+              <Command.Item
+                onSelect={() => runCommand(() => navigate({ to: '/projects' }))}
+                className="flex items-center gap-2 rounded-sm px-2 py-1.5 text-sm hover:bg-accent cursor-pointer"
+              >
+                <Briefcase size={16} />
+                <span>Projects</span>
+              </Command.Item>
+            </Command.Group>
 
-        <Command.Group heading="Actions">
-          <Command.Item onSelect={() => runCommand(() => {
-            navigator.clipboard.writeText('your.email@example.com')
-          })}>
-            <Mail size={16} />
-            <span>Copy Email</span>
-          </Command.Item>
-          <Command.Item onSelect={() => runCommand(() => {
-            window.open('/resume.pdf', '_blank')
-          })}>
-            <FileText size={16} />
-            <span>Download Resume</span>
-          </Command.Item>
-        </Command.Group>
+            <Command.Group heading="Actions">
+              <Command.Item
+                onSelect={() => runCommand(() => {
+                  navigator.clipboard.writeText('eriansha.van@gmail.com')
+                })}
+                className="flex items-center gap-2 rounded-sm px-2 py-1.5 text-sm hover:bg-accent cursor-pointer"
+              >
+                <Mail size={16} />
+                <span>Copy Email</span>
+              </Command.Item>
+              <Command.Item
+                onSelect={() => runCommand(() => {
+                  window.open('/resume.pdf', '_blank')
+                })}
+                className="flex items-center gap-2 rounded-sm px-2 py-1.5 text-sm hover:bg-accent cursor-pointer"
+              >
+                <FileText size={16} />
+                <span>Download Resume</span>
+              </Command.Item>
+            </Command.Group>
 
-        <Command.Group heading="Social">
-          <Command.Item onSelect={() => runCommand(() => {
-            window.open('https://github.com/username', '_blank')
-          })}>
-            <Github size={16} />
-            <span>GitHub</span>
-          </Command.Item>
-          <Command.Item onSelect={() => runCommand(() => {
-            window.open('https://linkedin.com/in/username', '_blank')
-          })}>
-            <Linkedin size={16} />
-            <span>LinkedIn</span>
-          </Command.Item>
-        </Command.Group>
-      </Command.List>
-    </Command.Dialog>
+            <Command.Group heading="Social">
+              <Command.Item
+                onSelect={() => runCommand(() => {
+                  window.open('https://github.com/eriansha', '_blank')
+                })}
+                className="flex items-center gap-2 rounded-sm px-2 py-1.5 text-sm hover:bg-accent cursor-pointer"
+              >
+                <Github size={16} />
+                <span>GitHub</span>
+              </Command.Item>
+              <Command.Item
+                onSelect={() => runCommand(() => {
+                  window.open('https://linkedin.com/in/eriansha', '_blank')
+                })}
+                className="flex items-center gap-2 rounded-sm px-2 py-1.5 text-sm hover:bg-accent cursor-pointer"
+              >
+                <Linkedin size={16} />
+                <span>LinkedIn</span>
+              </Command.Item>
+            </Command.Group>
+          </Command.List>
+        </Command>
+      </DialogContent>
+    </Dialog>
   )
 }
 ```
@@ -1177,13 +1425,16 @@ VITE_CONTACT_EMAIL=your.email@example.com
 ### 4.14 Implementation Roadmap (Updated)
 
 **Phase 1: Foundation** (Week 1)
-- [ ] Set up Tailwind CSS
-- [ ] Install additional dependencies (framer-motion, cmdk, lucide-react)
-- [ ] Create base UI components (Button, Card, Badge, Link)
-- [ ] Set up routing structure
-- [ ] Create Layout component (Header, Footer)
-- [ ] Implement theme system (light/dark mode)
+- [ ] Set up Tailwind CSS with animations
+- [ ] Initialize shadcn/ui (`bunx shadcn@latest init`)
+- [ ] Install additional dependencies (@tanstack/react-router, framer-motion, cmdk, lucide-react)
+- [ ] Add shadcn/ui components (button, card, badge, dialog, dropdown-menu, tooltip)
+- [ ] Set up TanStack Router with Vite plugin
+- [ ] Create route files structure in `src/routes/`
+- [ ] Create Layout component in `__root.tsx` (Header, Footer)
+- [ ] Implement theme system (light/dark mode) with shadcn/ui
 - [ ] Set up global styles and CSS variables
+- [ ] Configure path aliases (@/ for src) in tsconfig and vite.config
 
 **Phase 2: Data & Content** (Week 1-2)
 - [ ] Create type definitions (Project, Experience, Skill)
@@ -1194,17 +1445,19 @@ VITE_CONTACT_EMAIL=your.email@example.com
 - [ ] Write about page content
 
 **Phase 3: Core Pages** (Week 2-3)
-- [ ] Build HomePage
+- [ ] Build HomePage (src/routes/index.tsx)
   - Hero section with animated text
   - Featured projects grid
   - Social links
-- [ ] Build AboutPage
+- [ ] Build AboutPage (src/routes/about.tsx)
   - Extended bio
   - Timeline/Experience section
   - Skills showcase
-- [ ] Build ProjectsPage (if separate from home)
+- [ ] Build ProjectsPage (src/routes/projects.tsx)
   - Full project grid with filtering
   - Project cards with all fields
+- [ ] Build ProjectDetailPage (src/routes/projects.$id.tsx)
+  - Individual project showcase
 
 **Phase 4: Enhanced Features** (Week 3-4)
 - [ ] Implement Command Palette (Cmd+K)
@@ -1301,14 +1554,12 @@ VITE_CONTACT_EMAIL=your.email@example.com
 - [ ] Build about page with biography
 - [ ] Build portfolio grid with filtering
 - [ ] Build portfolio case study template
-- [ ] Build contact page with form
 - [ ] Implement basic SEO (meta tags, semantic HTML)
 
 **Nice-to-Have**:
 - [ ] Page transitions and animations
 - [ ] Dark mode toggle
 - [ ] Portfolio search functionality
-- [ ] Contact form backend integration
 
 **Deliverables**:
 - Functional website on staging environment
@@ -1363,7 +1614,6 @@ VITE_CONTACT_EMAIL=your.email@example.com
 - Mobile responsive
 - Basic SEO
 - Performance optimization
-- Contact form
 
 **Nice-to-Have (P1)**: Enhancements post-launch
 - Blog functionality
@@ -1545,13 +1795,9 @@ These sites directly inspire the design and functionality of this project:
 
 **ED-001**: When a user clicks a portfolio item, the system shall navigate to the case study page
 
-**ED-002**: When the contact form is submitted successfully, the system shall display a confirmation message
+**ED-002**: When a user hovers over a project card, the system shall display a subtle elevation effect
 
-**ED-003**: When the contact form submission fails, the system shall display an error message with retry option
-
-**ED-004**: When a user hovers over a project card, the system shall display a subtle elevation effect
-
-**ED-005**: When a page loads, the system shall animate content with fade-in transitions
+**ED-003**: When a page loads, the system shall animate content with fade-in transitions
 
 ### Optional Features
 
@@ -1563,13 +1809,11 @@ These sites directly inspire the design and functionality of this project:
 
 ### Unwanted Behavior Requirements
 
-**UB-001**: If the contact form is submitted with invalid email, then the system shall display field-level error
+**UB-001**: If an image fails to load, then the system shall display a fallback placeholder
 
-**UB-002**: If an image fails to load, then the system shall display a fallback placeholder
+**UB-002**: If JavaScript is disabled, then the website shall still display all content (progressive enhancement)
 
-**UB-003**: If JavaScript is disabled, then the website shall still display all content (progressive enhancement)
-
-**UB-004**: If a 404 page is accessed, then the system shall display a helpful error page with navigation
+**UB-003**: If a 404 page is accessed, then the system shall display a helpful error page with navigation
 
 ---
 
@@ -1577,18 +1821,18 @@ These sites directly inspire the design and functionality of this project:
 
 **At Launch**:
 - Website accessible via custom domain with SSL
-- All core pages (Home, About, Portfolio, Contact) functional
+- All core pages (Home, About, Portfolio) functional
 - 6-10 portfolio projects with case studies
 - Lighthouse performance score ≥ 90
 - Lighthouse accessibility score ≥ 90
 - Mobile-responsive on all breakpoints
-- Contact form functional
+- Contact information easily accessible (email, social links)
 
 **Post-Launch (3 months)**:
 - Average page load time < 2 seconds
 - Bounce rate < 60%
 - Average session duration > 2 minutes
-- At least 3 contact form submissions per month
+- Positive engagement through social media and email
 - Zero critical accessibility issues
 
 **Long-Term (6 months)**:
@@ -1609,8 +1853,10 @@ These sites directly inspire the design and functionality of this project:
 
 ---
 
-**Document Version**: 2.0
+**Document Version**: 2.1
 **Last Updated**: 2026-01-07
-**Owner**: Muhamad Eriansya
+**Owner**: Muhamad Eriansya (Ivan Putra Eriansya)
 **Status**: Ready for Implementation
-**Major Updates**: Added comprehensive Code Structure & Technical Architecture section (Section 4)
+**Major Updates**:
+- v2.0: Added comprehensive Code Structure & Technical Architecture section (Section 4)
+- v2.1: Updated to use shadcn/ui + Tailwind CSS and TanStack Router (replacing React Router)
