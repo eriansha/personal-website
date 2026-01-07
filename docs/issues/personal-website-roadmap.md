@@ -40,6 +40,7 @@ The website shall contain the following primary sections:
 ### 1.2 Content Requirements by Section
 
 #### Homepage Content Needs
+
 - Name and professional title
 - Compelling tagline (10-15 words max)
 - Brief value proposition (2-3 sentences)
@@ -50,6 +51,7 @@ The website shall contain the following primary sections:
 #### Biography Content Needs
 
 The biography section shall include:
+
 - Professional summary (150-200 words)
 - Core skills and competencies (8-12 items)
 - Education background with degrees and institutions
@@ -58,6 +60,7 @@ The biography section shall include:
 - Professional philosophy or mission statement
 
 **Structure Recommendation**:
+
 - When writing the biography, start with current role and work backwards
 - The biography shall emphasize results and impact over responsibilities
 - Where quantifiable achievements exist, the biography shall include specific metrics
@@ -65,6 +68,7 @@ The biography section shall include:
 #### Portfolio Content Needs
 
 For each portfolio piece, the content shall include:
+
 - Project title and subtitle
 - Client/Company (if applicable)
 - Role and responsibilities
@@ -77,6 +81,7 @@ For each portfolio piece, the content shall include:
 - Link to live project (if available)
 
 **Content Preparation Checklist**:
+
 - [ ] Select 6-10 best representative projects
 - [ ] Gather high-quality images for each project (minimum 1200px width)
 - [ ] Write case studies following problem-solution-result structure
@@ -92,24 +97,28 @@ For each portfolio piece, the content shall include:
 The color scheme shall be selected based on industry and personal brand:
 
 **For Tech/Engineering Field**:
+
 - Primary: Deep blue (#0A2463) - Trust, professionalism
 - Secondary: Vibrant cyan (#00B4D8) - Innovation, technology
 - Accent: Warm orange (#F77F00) - Energy, creativity
 - Neutral: Charcoal (#2B2D42) and Off-white (#F8F9FA)
 
 **For Creative/Design Field**:
+
 - Primary: Rich purple (#6A4C93) - Creativity, sophistication
 - Secondary: Soft coral (#FF6B6B) - Warmth, approachability
 - Accent: Golden yellow (#FFD23F) - Optimism, energy
 - Neutral: Slate gray (#404E5C) and Cream (#FFFBF0)
 
 **For Business/Consulting**:
+
 - Primary: Navy (#1E3A5F) - Authority, reliability
 - Secondary: Teal (#14B8A6) - Growth, balance
 - Accent: Gold (#D4AF37) - Premium, success
 - Neutral: Charcoal (#333333) and Light gray (#F5F5F5)
 
 **Color Usage Requirements**:
+
 - The design shall use the primary color for headers and key UI elements
 - The design shall use the secondary color for links and interactive elements
 - The design shall use the accent color sparingly for calls-to-action
@@ -120,34 +129,40 @@ The color scheme shall be selected based on industry and personal brand:
 The typography system shall follow these requirements:
 
 **Heading Font**:
+
 - The website shall use a modern sans-serif for headings (e.g., Inter, Poppins, Montserrat)
 - Heading font-weight shall be 600-700 for emphasis
 - Where display headings exist, they shall use larger tracking (letter-spacing)
 
 **Body Font**:
+
 - The website shall use a readable serif or sans-serif for body text (e.g., Source Sans Pro, Open Sans, or Merriweather for serif)
 - Body text shall be minimum 16px on mobile, 18px on desktop
 - Line-height shall be 1.6-1.8 for optimal readability
 
 **Type Scale**:
+
 - The design shall implement a modular scale (1.25 or 1.333 ratio)
 - When on mobile devices, the font sizes shall scale down proportionally
 
 ### 2.3 Layout Structure
 
 **Grid System**:
+
 - The layout shall use a 12-column grid on desktop
 - When on tablet devices, the layout shall use an 8-column grid
 - When on mobile devices, the layout shall use a 4-column grid
 - The design shall maintain consistent gutter spacing (24px desktop, 16px mobile)
 
 **Navigation**:
+
 - The navigation shall be fixed at the top of the page
 - While scrolling down, the navigation shall remain accessible
 - When on mobile, the navigation shall collapse into a hamburger menu
 - The navigation shall highlight the current section
 
 **Section Layouts**:
+
 - The homepage shall use full-width hero with centered content
 - The about section shall use two-column layout (image + text) on desktop
 - The portfolio shall use card-based grid layout (3 columns on desktop, 1 on mobile)
@@ -164,6 +179,7 @@ The visual content shall follow these guidelines:
 - Profile photos shall be professionally shot with clean background
 
 **Image Requirements**:
+
 - Hero image: 1920x1080px minimum
 - Portfolio images: 1200x800px minimum
 - Profile photo: 800x800px minimum, square crop
@@ -176,6 +192,7 @@ The visual content shall follow these guidelines:
 ### 3.1 Mobile Responsiveness
 
 **Breakpoint Requirements**:
+
 - The website shall support the following breakpoints:
   - Mobile: 320px - 767px
   - Tablet: 768px - 1023px
@@ -183,6 +200,7 @@ The visual content shall follow these guidelines:
   - Large Desktop: 1440px+
 
 **Mobile-Specific Requirements**:
+
 - When on mobile devices, touch targets shall be minimum 44x44px
 - The website shall support touch gestures for portfolio galleries
 - When on mobile, the website shall load mobile-optimized images
@@ -191,42 +209,49 @@ The visual content shall follow these guidelines:
 ### 3.2 Performance Optimization
 
 **Loading Performance**:
+
 - The website shall achieve Lighthouse performance score of 90+
 - The initial page load shall complete in under 3 seconds on 3G
 - When images are below the fold, the system shall lazy-load them
 - The website shall implement critical CSS inlining for above-the-fold content
 
 **Asset Optimization**:
+
 - All images shall be compressed and served in next-gen formats (WebP, AVIF)
 - The website shall implement responsive images with srcset
 - JavaScript bundles shall be code-split by route
 - The website shall use font-display: swap for web fonts
 
 **Caching Strategy**:
+
 - Static assets shall be cached with long expiration headers
 - The website shall implement service worker for offline functionality (optional)
 
 ### 3.3 SEO Fundamentals
 
 **Meta Tags**:
+
 - Each page shall have a unique, descriptive title (50-60 characters)
 - Each page shall have a meta description (150-160 characters)
 - The website shall include Open Graph tags for social sharing
 - The website shall include Twitter Card meta tags
 
 **Content SEO**:
+
 - The website shall use semantic HTML5 structure (header, nav, main, article, footer)
 - Each page shall have one H1 tag
 - The content shall use heading hierarchy (H1 → H2 → H3)
 - All images shall have descriptive alt text
 
 **Technical SEO**:
+
 - The website shall include a sitemap.xml
 - The website shall include a robots.txt file
 - The website shall implement schema.org structured data for Person/Portfolio
 - All links shall be crawlable (no JavaScript-only navigation)
 
 **Performance as SEO**:
+
 - Core Web Vitals shall meet "Good" thresholds:
   - LCP (Largest Contentful Paint): < 2.5s
   - FID (First Input Delay): < 100ms
@@ -309,60 +334,64 @@ The visual content shall follow these guidelines:
 Based on the provided references, here's what to incorporate:
 
 **1. [theodorusclarence.com](https://theodorusclarence.com/)**
-   - **Key Elements**:
-     - Clean, minimal hero with animated text (name, title, description)
-     - Elegant color tone (likely neutral with accent colors)
-     - Smooth typography with hierarchy
-   - **Implementation Approach**:
-     - Use Framer Motion for text animations (character-by-character reveal, fade-in)
-     - Implement gradient text effects for name
-     - Use Inter or similar modern sans-serif font
-   - **EARS Requirement**:
-     - **ED-006**: When the homepage loads, the system shall animate the hero text with staggered fade-in effect
+
+- **Key Elements**:
+  - Clean, minimal hero with animated text (name, title, description)
+  - Elegant color tone (likely neutral with accent colors)
+  - Smooth typography with hierarchy
+- **Implementation Approach**:
+  - Use Framer Motion for text animations (character-by-character reveal, fade-in)
+  - Implement gradient text effects for name
+  - Use Inter or similar modern sans-serif font
+- **EARS Requirement**:
+  - **ED-006**: When the homepage loads, the system shall animate the hero text with staggered fade-in effect
 
 **2. [jackyef.com](https://jackyef.com/)**
-   - **Key Elements**:
-     - Fun, playful color scheme
-     - Name and description prominently displayed
-     - Approachable personality through design
-   - **Implementation Approach**:
-     - Use vibrant accent colors (possibly purple, blue, or teal)
-     - Implement playful hover interactions
-     - Add personality through micro-animations
-   - **EARS Requirement**:
-     - **SD-005**: While hovering over interactive elements, the system shall display playful color transitions
+
+- **Key Elements**:
+  - Fun, playful color scheme
+  - Name and description prominently displayed
+  - Approachable personality through design
+- **Implementation Approach**:
+  - Use vibrant accent colors (possibly purple, blue, or teal)
+  - Implement playful hover interactions
+  - Add personality through micro-animations
+- **EARS Requirement**:
+  - **SD-005**: While hovering over interactive elements, the system shall display playful color transitions
 
 **3. [cv.jarocki.me](https://cv.jarocki.me/)**
-   - **Key Elements**:
-     - Command palette with `Cmd + J` shortcut
-     - Quick actions and navigation
-     - Keyboard-first interaction
-   - **Implementation Approach**:
-     - Use `cmdk` library (Command Menu by Paco Coursey)
-     - Implement global keyboard shortcuts
-     - Provide actions: navigate, copy contact info, download resume, toggle theme
-   - **EARS Requirements**:
-     - **ED-007**: When user presses `Cmd+K` or `Cmd+J`, the system shall open command palette overlay
-     - **ED-008**: When user types in command palette, the system shall filter available commands
-     - **ED-009**: When user selects a command, the system shall execute the corresponding action
+
+- **Key Elements**:
+  - Command palette with `Cmd + J` shortcut
+  - Quick actions and navigation
+  - Keyboard-first interaction
+- **Implementation Approach**:
+  - Use `cmdk` library (Command Menu by Paco Coursey)
+  - Implement global keyboard shortcuts
+  - Provide actions: navigate, copy contact info, download resume, toggle theme
+- **EARS Requirements**:
+  - **ED-007**: When user presses `Cmd+K` or `Cmd+J`, the system shall open command palette overlay
+  - **ED-008**: When user types in command palette, the system shall filter available commands
+  - **ED-009**: When user selects a command, the system shall execute the corresponding action
 
 **4. [faldi.xyz](https://faldi.xyz/)**
-   - **Key Elements**:
-     - Straightforward branding: "Product Engineer & Mentor"
-     - Portfolio structure with:
-       - Title
-       - Description
-       - Image (optional)
-       - Tech stack badges
-       - Live link (if available)
-       - GitHub link (if available)
-   - **Implementation Approach**:
-     - Create `ProjectCard` component with consistent structure
-     - Use tech stack badges/pills for visual scanning
-     - Implement external link icons for live/GitHub links
-     - Responsive grid layout (3 cols → 2 cols → 1 col)
-   - **EARS Requirement**:
-     - **UR-006**: Each project card shall display title, description, optional image, tech stack, and available links (live/GitHub)
+
+- **Key Elements**:
+  - Straightforward branding: "Product Engineer & Mentor"
+  - Portfolio structure with:
+    - Title
+    - Description
+    - Image (optional)
+    - Tech stack badges
+    - Live link (if available)
+    - GitHub link (if available)
+- **Implementation Approach**:
+  - Create `ProjectCard` component with consistent structure
+  - Use tech stack badges/pills for visual scanning
+  - Implement external link icons for live/GitHub links
+  - Responsive grid layout (3 cols → 2 cols → 1 col)
+- **EARS Requirement**:
+  - **UR-006**: Each project card shall display title, description, optional image, tech stack, and available links (live/GitHub)
 
 ### 4.3 Recommended Tech Stack
 
@@ -386,8 +415,7 @@ Based on the provided references, here's what to incorporate:
   },
   "devDependencies": {
     // ... existing dev dependencies
-    "tailwindcss": "^3.x", // Utility-first CSS
-    "tailwindcss-animate": "^1.x", // Animation utilities
+    "tailwindcss": "^4.x", // Utility-first CSS
     "autoprefixer": "^10.x",
     "postcss": "^8.x",
     "@tailwindcss/typography": "^0.5.x", // Blog typography
@@ -397,6 +425,7 @@ Based on the provided references, here's what to incorporate:
 ```
 
 **Rationale**:
+
 - **TanStack Router**: Type-safe routing with excellent TypeScript support, built-in code splitting, search params validation
 - **shadcn/ui**: Not a dependency but a collection of copy-paste components built with Radix UI and Tailwind
 - **Framer Motion**: Declarative animations, excellent performance, great DX
@@ -406,6 +435,7 @@ Based on the provided references, here's what to incorporate:
 - **CVA**: Type-safe component variants (used by shadcn/ui)
 
 **shadcn/ui Setup**:
+
 ```bash
 # Initialize shadcn/ui
 bunx shadcn@latest init
@@ -420,6 +450,7 @@ bunx shadcn@latest add tooltip
 ```
 
 **Alternative Considerations**:
+
 - **Routing**: TanStack Router provides better TypeScript experience than React Router
 - **UI Components**: shadcn/ui provides accessible components you own (not a dependency)
 - **Animations**: Could use GSAP for complex animations, but Framer Motion sufficient for most needs
@@ -506,6 +537,7 @@ personal-website/
 ```
 
 **File Structure Principles**:
+
 - **Co-location**: Components grouped by feature/page
 - **Separation of Concerns**: Data, UI, logic separated
 - **File-based Routing**: TanStack Router uses file-based routes in `src/routes/`
@@ -518,6 +550,7 @@ personal-website/
 **Approach**: Static Data (JSON/TypeScript) → No Database Required
 
 For a personal portfolio with infrequent updates, static data files are sufficient and provide:
+
 - Type safety with TypeScript
 - Version control for content changes
 - Fast builds and performance
@@ -562,14 +595,13 @@ export const projects: Project[] = [
     featured: true,
     category: 'web-app',
     startDate: '2023-01-15',
-    endDate: '2023-06-30'
+    endDate: '2023-06-30',
   },
   // ... more projects
 ]
 
 // Helper functions
-export const getFeaturedProjects = () =>
-  projects.filter(p => p.featured)
+export const getFeaturedProjects = () => projects.filter(p => p.featured)
 
 export const getProjectsByCategory = (category: ProjectCategory) =>
   projects.filter(p => p.category === category)
@@ -579,12 +611,14 @@ export const getAllTechStack = () =>
 ```
 
 **Benefits**:
+
 - Type-safe data access
 - Easy to query and filter
 - Can migrate to CMS later if needed (Contentful, Sanity, etc.)
 - Version controlled content
 
 **For Blog (P1)**:
+
 - Use markdown files in `content/blog/` directory
 - Use Vite plugins to import markdown as modules
 - Or use a headless CMS (Contentful, Strapi) for easier editing
@@ -652,9 +686,10 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
 ```
 
 **Utility Functions** - `src/lib/utils.ts`
+
 ```typescript
-import { type ClassValue, clsx } from "clsx"
-import { twMerge } from "tailwind-merge"
+import { type ClassValue, clsx } from 'clsx'
+import { twMerge } from 'tailwind-merge'
 
 // Merge Tailwind classes without conflicts
 export function cn(...inputs: ClassValue[]) {
@@ -663,6 +698,7 @@ export function cn(...inputs: ClassValue[]) {
 ```
 
 **Feature Components** - `src/components/projects/`
+
 ```typescript
 // ProjectCard.tsx
 import { Project } from '@/types/project'
@@ -726,6 +762,7 @@ export function ProjectCard({ project, layout = 'grid' }: ProjectCardProps) {
 ```
 
 **Animation Wrapper Pattern**:
+
 ```typescript
 // components/shared/AnimatedText.tsx
 import { motion } from 'framer-motion'
@@ -765,6 +802,7 @@ export function AnimatedText({ text, variant = 'fadeIn', delay = 0 }: AnimatedTe
 TanStack Router provides type-safe, file-based routing with excellent TypeScript support and built-in code splitting.
 
 **Vite Configuration** - `vite.config.ts`
+
 ```typescript
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
@@ -784,6 +822,7 @@ export default defineConfig({
 ```
 
 **Root Route** - `src/routes/__root.tsx`
+
 ```typescript
 import { createRootRoute, Outlet } from '@tanstack/react-router'
 import { TanStackRouterDevtools } from '@tanstack/router-devtools'
@@ -811,6 +850,7 @@ function RootLayout() {
 ```
 
 **Home Route** - `src/routes/index.tsx`
+
 ```typescript
 import { createFileRoute } from '@tanstack/react-router'
 import { Hero } from '@/components/home/Hero'
@@ -837,6 +877,7 @@ function HomePage() {
 ```
 
 **About Route** - `src/routes/about.tsx`
+
 ```typescript
 import { createFileRoute } from '@tanstack/react-router'
 import { Timeline } from '@/components/about/Timeline'
@@ -858,6 +899,7 @@ function AboutPage() {
 ```
 
 **Projects Route with Search Params** - `src/routes/projects.tsx`
+
 ```typescript
 import { createFileRoute } from '@tanstack/react-router'
 import { z } from 'zod'
@@ -889,6 +931,7 @@ function ProjectsPage() {
 ```
 
 **Project Detail Route (Dynamic)** - `src/routes/projects.$id.tsx`
+
 ```typescript
 import { createFileRoute, notFound } from '@tanstack/react-router'
 import { projects } from '@/data/projects'
@@ -916,6 +959,7 @@ function ProjectDetailPage() {
 ```
 
 **Main Entry Point** - `src/main.tsx`
+
 ```typescript
 import React from 'react'
 import ReactDOM from 'react-dom/client'
@@ -944,6 +988,7 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
 ```
 
 **Benefits**:
+
 - **Type Safety**: Full TypeScript support with autocomplete for routes and params
 - **File-Based**: Routes automatically generated from file structure
 - **Code Splitting**: Automatic code splitting by route
@@ -958,6 +1003,7 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
 **Framer Motion Best Practices**
 
 **1. Page Transitions**:
+
 ```typescript
 // pages/HomePage.tsx
 import { motion } from 'framer-motion'
@@ -990,6 +1036,7 @@ export function HomePage() {
 ```
 
 **2. Staggered Children (for project grid)**:
+
 ```typescript
 const containerVariants = {
   hidden: { opacity: 0 },
@@ -1021,6 +1068,7 @@ const itemVariants = {
 ```
 
 **3. Text Animation (inspired by theodorusclarence.com)**:
+
 ```typescript
 // Hero text with character animation
 import { motion } from 'framer-motion'
@@ -1050,6 +1098,7 @@ const charVariants = {
 ```
 
 **4. Hover Interactions**:
+
 ```typescript
 <motion.div
   whileHover={{ scale: 1.03, y: -5 }}
@@ -1061,6 +1110,7 @@ const charVariants = {
 ```
 
 **Performance Considerations**:
+
 - Use `will-change` CSS property sparingly
 - Animate transforms and opacity (GPU accelerated)
 - Avoid animating layout properties (width, height, padding)
@@ -1187,6 +1237,7 @@ export function CommandPalette() {
 ```
 
 **Features**:
+
 - `Cmd+K` or `Cmd+J` to open
 - Fuzzy search
 - Keyboard navigation
@@ -1195,6 +1246,7 @@ export function CommandPalette() {
 - Extensible for future commands
 
 **EARS Requirements**:
+
 - **ED-007**: When user presses `Cmd+K` or `Cmd+J`, the system shall open command palette
 - **ED-008**: When user types in command palette, the system shall filter commands with fuzzy matching
 - **ED-009**: When command is selected, the system shall execute action and close palette
@@ -1228,7 +1280,7 @@ export function useTheme() {
   }, [theme])
 
   const toggleTheme = () => {
-    setTheme(prev => prev === 'light' ? 'dark' : 'light')
+    setTheme(prev => (prev === 'light' ? 'dark' : 'light'))
   }
 
   return { theme, toggleTheme }
@@ -1236,6 +1288,7 @@ export function useTheme() {
 ```
 
 **Tailwind Configuration**:
+
 ```javascript
 // tailwind.config.js
 module.exports = {
@@ -1249,13 +1302,14 @@ module.exports = {
         primary: 'var(--primary)',
         secondary: 'var(--secondary)',
         accent: 'var(--accent)',
-      }
-    }
-  }
+      },
+    },
+  },
 }
 ```
 
 **CSS Variables** (globals.css):
+
 ```css
 :root {
   --background: 255 255 255;
@@ -1324,6 +1378,7 @@ export function SEO({
 ```
 
 **Usage in Pages**:
+
 ```typescript
 export function HomePage() {
   return (
@@ -1341,6 +1396,7 @@ export function HomePage() {
 ### 4.12 Development Workflow
 
 **1. Local Development**:
+
 ```bash
 # Start dev server
 bun run dev
@@ -1356,6 +1412,7 @@ bun run type-check  # Add to package.json: "tsc --noEmit"
 ```
 
 **2. Build & Preview**:
+
 ```bash
 # Build for production
 bun run build
@@ -1365,6 +1422,7 @@ bun run preview
 ```
 
 **3. Code Quality Checks** (add to package.json):
+
 ```json
 {
   "scripts": {
@@ -1380,12 +1438,14 @@ bun run preview
 ```
 
 **4. Git Hooks** (optional, using husky):
+
 - Pre-commit: Run lint + format check
 - Pre-push: Run type-check + build
 
 ### 4.13 Deployment Strategy
 
 **Recommended Platforms** (all support Bun now):
+
 1. **Vercel** (Recommended)
    - Zero config deployment
    - Automatic previews for PRs
@@ -1403,6 +1463,7 @@ bun run preview
    - Edge runtime
 
 **Deployment Steps** (Vercel example):
+
 ```bash
 # Install Vercel CLI
 bun add -g vercel
@@ -1415,6 +1476,7 @@ vercel --prod
 ```
 
 **Environment Variables** (if needed):
+
 ```bash
 # .env.example
 VITE_SITE_URL=https://yoursite.com
@@ -1425,6 +1487,7 @@ VITE_CONTACT_EMAIL=your.email@example.com
 ### 4.14 Implementation Roadmap (Updated)
 
 **Phase 1: Foundation** (Week 1)
+
 - [ ] Set up Tailwind CSS with animations
 - [ ] Initialize shadcn/ui (`bunx shadcn@latest init`)
 - [ ] Install additional dependencies (@tanstack/react-router, framer-motion, cmdk, lucide-react)
@@ -1437,6 +1500,7 @@ VITE_CONTACT_EMAIL=your.email@example.com
 - [ ] Configure path aliases (@/ for src) in tsconfig and vite.config
 
 **Phase 2: Data & Content** (Week 1-2)
+
 - [ ] Create type definitions (Project, Experience, Skill)
 - [ ] Populate `data/projects.ts` with portfolio projects
 - [ ] Populate `data/experience.ts` with work history
@@ -1445,6 +1509,7 @@ VITE_CONTACT_EMAIL=your.email@example.com
 - [ ] Write about page content
 
 **Phase 3: Core Pages** (Week 2-3)
+
 - [ ] Build HomePage (src/routes/index.tsx)
   - Hero section with animated text
   - Featured projects grid
@@ -1460,6 +1525,7 @@ VITE_CONTACT_EMAIL=your.email@example.com
   - Individual project showcase
 
 **Phase 4: Enhanced Features** (Week 3-4)
+
 - [ ] Implement Command Palette (Cmd+K)
 - [ ] Add page transitions with Framer Motion
 - [ ] Add micro-interactions (hover effects, loading states)
@@ -1468,6 +1534,7 @@ VITE_CONTACT_EMAIL=your.email@example.com
 - [ ] SEO optimization (meta tags, OpenGraph, sitemap)
 
 **Phase 5: Polish** (Week 4)
+
 - [ ] Performance optimization
 - [ ] Accessibility audit
 - [ ] Cross-browser testing
@@ -1476,6 +1543,7 @@ VITE_CONTACT_EMAIL=your.email@example.com
 - [ ] Deploy to production
 
 **Phase 6: Post-Launch** (P1 Features)
+
 - [ ] Blog functionality (markdown-based)
 - [ ] Snippets section
 - [ ] Analytics integration
@@ -1511,6 +1579,7 @@ VITE_CONTACT_EMAIL=your.email@example.com
 ### Phase 1: Planning & Content Preparation (2-3 weeks)
 
 **Must-Have**:
+
 - [ ] Finalize site structure and page list
 - [ ] Write all biography content
 - [ ] Select and prepare portfolio projects (6-10)
@@ -1518,11 +1587,13 @@ VITE_CONTACT_EMAIL=your.email@example.com
 - [ ] Define brand colors and typography
 
 **Nice-to-Have**:
+
 - [ ] Create content calendar for blog
 - [ ] Professional photoshoot
 - [ ] Video introduction
 
 **Deliverables**:
+
 - Content document with all copy
 - Asset library (images, logos, files)
 - Brand style guide
@@ -1530,17 +1601,20 @@ VITE_CONTACT_EMAIL=your.email@example.com
 ### Phase 2: Design & Prototyping (2-3 weeks)
 
 **Must-Have**:
+
 - [ ] Create wireframes for all pages (mobile + desktop)
 - [ ] Design high-fidelity mockups for homepage and about page
 - [ ] Design portfolio grid and case study template
 - [ ] Establish component library (buttons, cards, forms)
 
 **Nice-to-Have**:
+
 - [ ] Interactive prototype in Figma
 - [ ] Micro-interactions and animations design
 - [ ] Dark mode design variant
 
 **Deliverables**:
+
 - Design files (Figma/Sketch)
 - Component specifications
 - Design system documentation
@@ -1548,6 +1622,7 @@ VITE_CONTACT_EMAIL=your.email@example.com
 ### Phase 3: Development - Core Features (3-4 weeks)
 
 **Must-Have**:
+
 - [ ] Set up development environment (React + Vite)
 - [ ] Implement responsive navigation
 - [ ] Build homepage with hero section
@@ -1557,11 +1632,13 @@ VITE_CONTACT_EMAIL=your.email@example.com
 - [ ] Implement basic SEO (meta tags, semantic HTML)
 
 **Nice-to-Have**:
+
 - [ ] Page transitions and animations
 - [ ] Dark mode toggle
 - [ ] Portfolio search functionality
 
 **Deliverables**:
+
 - Functional website on staging environment
 - All core pages implemented
 - Mobile responsive on all breakpoints
@@ -1569,6 +1646,7 @@ VITE_CONTACT_EMAIL=your.email@example.com
 ### Phase 4: Polish & Optimization (1-2 weeks)
 
 **Must-Have**:
+
 - [ ] Image optimization and lazy loading
 - [ ] Performance audit and fixes
 - [ ] Cross-browser testing (Chrome, Firefox, Safari)
@@ -1577,12 +1655,14 @@ VITE_CONTACT_EMAIL=your.email@example.com
 - [ ] SEO audit and optimization
 
 **Nice-to-Have**:
+
 - [ ] Advanced animations and micro-interactions
 - [ ] Analytics integration (Google Analytics/Plausible)
 - [ ] A/B testing setup
 - [ ] Service worker for offline access
 
 **Deliverables**:
+
 - Performance report (Lighthouse scores)
 - Accessibility audit report
 - Browser compatibility matrix
@@ -1590,6 +1670,7 @@ VITE_CONTACT_EMAIL=your.email@example.com
 ### Phase 5: Launch & Post-Launch (1 week)
 
 **Must-Have**:
+
 - [ ] Deploy to production hosting
 - [ ] Configure custom domain and SSL
 - [ ] Submit sitemap to search engines
@@ -1597,12 +1678,14 @@ VITE_CONTACT_EMAIL=your.email@example.com
 - [ ] Create backup strategy
 
 **Nice-to-Have**:
+
 - [ ] Set up CI/CD pipeline
 - [ ] Configure CDN
 - [ ] Social media launch announcement
 - [ ] Create maintenance schedule
 
 **Deliverables**:
+
 - Live website
 - Deployment documentation
 - Maintenance plan
@@ -1610,18 +1693,21 @@ VITE_CONTACT_EMAIL=your.email@example.com
 ### Priority Matrix
 
 **Must-Have (P0)**: Core functionality for launch
+
 - Homepage, About, Portfolio pages
 - Mobile responsive
 - Basic SEO
 - Performance optimization
 
 **Nice-to-Have (P1)**: Enhancements post-launch
+
 - Blog functionality
 - Advanced animations
 - Dark mode
 - Analytics
 
 **Future Enhancements (P2)**: Long-term improvements
+
 - Multilingual support
 - Interactive resume download
 - Testimonials section
@@ -1713,6 +1799,7 @@ These sites directly inspire the design and functionality of this project:
 ### Design Trends for 2026
 
 **Recommended Trends**:
+
 1. **Glassmorphism & Frosted Glass Effects**
    - Subtle backdrop blur for cards and modals
    - Creates depth and modern aesthetic
@@ -1737,6 +1824,7 @@ These sites directly inspire the design and functionality of this project:
    - Maintains balance and harmony
 
 **Trends to Avoid**:
+
 - Overly complex animations that hurt performance
 - Auto-playing videos without user control
 - Excessive parallax scrolling (causes motion sickness)
@@ -1746,21 +1834,25 @@ These sites directly inspire the design and functionality of this project:
 ### Design Resources
 
 **Color Tools**:
+
 - [Coolors.co](https://coolors.co/) - Color palette generator
 - [Adobe Color](https://color.adobe.com/) - Color wheel and schemes
 - [Contrast Checker](https://webaim.org/resources/contrastchecker/) - WCAG compliance
 
 **Typography**:
+
 - [Google Fonts](https://fonts.google.com/) - Free web fonts
 - [Font Pair](https://fontpair.co/) - Font pairing suggestions
 - [Type Scale](https://typescale.com/) - Visual type scale calculator
 
 **Imagery**:
+
 - [Unsplash](https://unsplash.com/) - Free high-quality photos
 - [Shots.so](https://shots.so/) - Device mockup generator
 - [Remove.bg](https://remove.bg/) - Background removal tool
 
 **Icons**:
+
 - [Heroicons](https://heroicons.com/) - Beautiful SVG icons
 - [Lucide](https://lucide.dev/) - Icon toolkit
 - [Font Awesome](https://fontawesome.com/) - Comprehensive icon library
@@ -1820,6 +1912,7 @@ These sites directly inspire the design and functionality of this project:
 ## Success Metrics
 
 **At Launch**:
+
 - Website accessible via custom domain with SSL
 - All core pages (Home, About, Portfolio) functional
 - 6-10 portfolio projects with case studies
@@ -1829,6 +1922,7 @@ These sites directly inspire the design and functionality of this project:
 - Contact information easily accessible (email, social links)
 
 **Post-Launch (3 months)**:
+
 - Average page load time < 2 seconds
 - Bounce rate < 60%
 - Average session duration > 2 minutes
@@ -1836,6 +1930,7 @@ These sites directly inspire the design and functionality of this project:
 - Zero critical accessibility issues
 
 **Long-Term (6 months)**:
+
 - Ranking on first page for "[Your Name]" search
 - 500+ unique visitors per month
 - Portfolio showcased in job applications with positive feedback
@@ -1858,5 +1953,6 @@ These sites directly inspire the design and functionality of this project:
 **Owner**: Muhamad Eriansya (Ivan Putra Eriansya)
 **Status**: Ready for Implementation
 **Major Updates**:
+
 - v2.0: Added comprehensive Code Structure & Technical Architecture section (Section 4)
 - v2.1: Updated to use shadcn/ui + Tailwind CSS and TanStack Router (replacing React Router)
